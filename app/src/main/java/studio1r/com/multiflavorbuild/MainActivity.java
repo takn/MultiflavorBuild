@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
             String myApiKey = bundle.getString("LOCALYTICS");
             textView.setText(myApiKey);
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Failed to load meta-data, NameNotFound: " + e.getMessage());
+            Log.e(TAG, "Failed to load meta-data, NameNotFound: xxx " + e.getMessage());
         } catch (NullPointerException e) {
             Log.e(TAG, "Failed to load meta-data, NullPointer: " + e.getMessage());
         }
