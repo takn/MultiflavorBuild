@@ -19,38 +19,63 @@ android {
         versionName "1.0"
         manifestPlaceholders = [localyticsKey: "DefaultLocalyticsKey"]
     }
+
+    // buildTypes {
+//    release { //Only use the release key on a release buildType
+//        productFlavors.vanilla.signingConfig signingConfigs.vanilla
+//        productFlavors.strawberry.signingConfig signingConfigs.strawberry
+//    }
+//}
+
+
+    productFlavors {
+        def testSigningConfig = android.signingConfigs.release
+        def testSigningConfigDev = android.signingConfigs.debug
+        historyDev {
+            applicationId 'com.aetn.history.watch.dev'
+            manifestPlaceholders = [localyticsKey: "HistoryDevKey"]
+//            res.srcDirs = ['/app/historyCommon/res', '/app/historyDevSrc/res']
+            //add signingconfig here.
+            signingConfig testSigningConfigDev
+        }
+        historyProd {
+            manifestPlaceholders = [localyticsKey: "HistoryProdKey"]
+            signingConfig testSigningConfig
+        }
+        aetvDev {
+            applicationId 'com.aetn.aetv.watch.dev'
+            manifestPlaceholders = [localyticsKey: "AEDevKey"]
+            signingConfig testSigningConfigDev
+        }
+        aetvProd {
+            applicationId 'com.aetn.aetv.watch'
+            manifestPlaceholders = [localyticsKey: "AEProdKey"]
+            signingConfig testSigningConfig
+        }
+        lifetimeDev {
+            applicationId 'com.aetn.lifetime.watch.dev'
+            manifestPlaceholders = [localyticsKey: "LifetimeDevKey"]
+            signingConfig testSigningConfigDev
+        }
+        lifetimeProd {
+            applicationId 'com.aetn.lifetime.watch'
+            manifestPlaceholders = [localyticsKey: "LifetimeProdKey"]
+            signingConfig testSigningConfig
+        }
+
+    }
+//    android.sourceSets {
+////        main.res.srcDirs = ['src/main/res', 'src/main/res2']
+////        historyDev.res.srcDirs = ['src/historyCommon/res']
+////        historyDev.res.srcDirs = ['src/historyCommon/res']
+//    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
-    }
-    productFlavors {
-        historyDev {
-            applicationId 'com.aetn.history.watch.dev'
-            manifestPlaceholders = [localyticsKey: "HistoryDevKey"]
-        }
-        historyProd {
-            manifestPlaceholders = [localyticsKey: "HistoryProdKey"]
-        }
-        aetvDev {
-            applicationId 'com.aetn.aetv.watch.dev'
-            manifestPlaceholders = [ localyticsKey:"AEDevKey"]
-        }
-        aetvProd {
-            applicationId 'com.aetn.aetv.watch'
-            manifestPlaceholders = [ localyticsKey:"AEProdKey"]
-        }
-        lifetimeDev {
-            applicationId 'com.aetn.lifetime.watch.dev'
-            manifestPlaceholders = [ localyticsKey:"LifetimeDevKey"]
-        }
-        lifetimeProd {
-            applicationId 'com.aetn.lifetime.watch'
-            manifestPlaceholders = [ localyticsKey:"LifetimeProdKey"]
-        }
-
     }
 }
 
