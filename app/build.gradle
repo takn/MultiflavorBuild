@@ -20,14 +20,6 @@ android {
         manifestPlaceholders = [localyticsKey: "DefaultLocalyticsKey"]
     }
 
-    // buildTypes {
-//    release { //Only use the release key on a release buildType
-//        productFlavors.vanilla.signingConfig signingConfigs.vanilla
-//        productFlavors.strawberry.signingConfig signingConfigs.strawberry
-//    }
-//}
-
-
     productFlavors {
         def testSigningConfig = android.signingConfigs.release
         def testSigningConfigDev = android.signingConfigs.debug
