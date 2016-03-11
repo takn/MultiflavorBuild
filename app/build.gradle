@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            keyAlias 'buildTest'
+            keyPassword 'password'
+            storeFile file('key.jks')
+            storePassword 'password'
+        }
+    }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+    defaultConfig {
+        applicationId "studio1r.com.multiflavorbuild"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        manifestPlaceholders = [localyticsKey: "DefaultLocalyticsKey"]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    productFlavors {
+        historyDev {
+            applicationId 'com.aetn.history.watch.dev'
+            manifestPlaceholders = [localyticsKey: "HistoryDevKey"]
+        }
+        historyProd {
+            manifestPlaceholders = [localyticsKey: "HistoryProdKey"]
+        }
+        aetvDev {
+            applicationId 'com.aetn.aetv.watch.dev'
+            manifestPlaceholders = [ localyticsKey:"AEDevKey"]
+        }
+        aetvProd {
+            applicationId 'com.aetn.aetv.watch'
+            manifestPlaceholders = [ localyticsKey:"AEProdKey"]
+        }
+        lifetimeDev {
+            applicationId 'com.aetn.lifetime.watch.dev'
+            manifestPlaceholders = [ localyticsKey:"LifetimeDevKey"]
+        }
+        lifetimeProd {
+            applicationId 'com.aetn.lifetime.watch'
+            manifestPlaceholders = [ localyticsKey:"LifetimeProdKey"]
+        }
+
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+}
